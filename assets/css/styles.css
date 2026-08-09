@@ -294,7 +294,7 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
 /* ---------- about page ---------- */
 .duo { display: grid; grid-template-columns: 1fr 1fr; }
 .duo--border-bottom { border-bottom: 1px solid rgba(36, 31, 26, 0.1); }
-.duo--panel { background: var(--panel); border-top: 1px solid rgba(36, 31, 26, 0.1); }
+.duo--panel { background: var(--panel); border-top: 1px solid rgba(36, 31, 26, 0.1); grid-template-columns: 1fr; justify-items: center; }
 .duo__text {
   padding: 100px 56px;
   display: flex;
@@ -305,6 +305,7 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
 .eyebrow {
   font-family: var(--mono);
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--brass);
@@ -322,17 +323,20 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
 .duo__media { min-height: 520px; overflow: hidden; }
 .duo__media img { width: 100%; height: 100%; object-fit: cover; }
 .contact-block {
-  padding: 100px 56px;
+  padding: 56px 56px;
+  text-align: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 2px;
   font-family: var(--mono);
   font-size: 13px;
+  font-weight: 700;
   letter-spacing: 0.1em;
-  color: rgba(36, 31, 26, 0.78);
+  color: #000;
   line-height: 2.3;
 }
-.contact-block .btn { margin-top: 28px; align-self: flex-start; line-height: 1; }
+.contact-block .btn { margin-top: 28px; align-self: center; line-height: 1; }
 
 /* ---------- appointment page ---------- */
 .booking-wrap { flex: 1; display: flex; justify-content: center; }
@@ -370,15 +374,15 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   text-wrap: pretty;
 }
 
-.form { display: flex; flex-direction: column; gap: 26px; }
-.field { display: flex; flex-direction: column; gap: 10px; }
+.form { display: flex; flex-direction: column; gap: 20px; font-size: 0.92em; }
+.field { display: flex; flex-direction: column; gap: 8px; }
 .field__label {
   font-family: var(--sans);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(36, 31, 26, 0.65);
+  color: var(--ink);
 }
 .field input,
 .field textarea {
@@ -444,7 +448,7 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   padding: 6px 12px;
 }
 .calendar__nav:hover { color: var(--brass); }
-.calendar__month { font-family: var(--serif); font-size: 18px; }
+.calendar__month { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink); }
 .calendar__weekdays,
 .calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; justify-items: center; }
 .calendar__weekdays {
@@ -498,6 +502,29 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
 
 .confirmation { display: flex; flex-direction: column; gap: 20px; padding: 20px 0 8px; }
 .confirmation h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; }
+.confirmation__note { font-size: 15px; opacity: 0.75; max-width: 42ch; }
+
+.how-it-works { max-width: 900px; margin: 0 auto; padding: 72px 48px; display: flex; flex-direction: column; gap: 22px; border: 1px solid rgba(241, 236, 227, 0.16); }
+.how-it-works h2 { font-size: clamp(34px, 4.4vw, 48px); font-weight: 400; margin-bottom: 6px; }
+.how-it-works__step { display: flex; flex-direction: column; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(36, 31, 26, 0.16); }
+.how-it-works__label { font-family: var(--mono); font-size: 16px; letter-spacing: 0.1em; }
+.how-it-works__step p { font-family: var(--serif); font-size: 22px; line-height: 1.5; max-width: 60ch; }
+.how-it-works__cta {
+  align-self: flex-start;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.how-it-works--dark .how-it-works__step { border-bottom-color: rgba(241, 236, 227, 0.16); }
+.how-it-works--dark .how-it-works__cta { color: var(--dark-text); }
+@media (max-width: 640px) {
+  .how-it-works { padding: 48px 24px; }
+}
 .confirmation__summary {
   font-family: var(--mono);
   font-size: 12px;
@@ -512,10 +539,11 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   flex-direction: column;
   gap: 2px;
   margin-top: 32px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(36, 31, 26, 0.1);
+  padding: 28px 32px;
+  border: 1px solid rgba(36, 31, 26, 0.16);
   font-family: var(--sans);
   font-size: 14px;
+  font-weight: 700;
   color: var(--ink);
   line-height: 1.9;
 }
@@ -525,9 +553,9 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
 .site-footer__mark {
   font-family: "Times New Roman", Times, serif;
   font-weight: 600;
-  font-size: clamp(48px, 13vw, 220px);
+  font-size: clamp(36px, 10vw, 170px);
   line-height: 0.9;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
   text-align: center;
   padding: 60px 24px 40px;
   color: transparent;

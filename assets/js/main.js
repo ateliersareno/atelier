@@ -216,24 +216,46 @@
       });
 
       var url = buildCalendarUrl(data);
-      if (url && calendarLink) {
-        calendarLink.href = url;
-        calendarLink.hidden = false;
-      }
 
-      /* Hook for a real backend:
-         fetch("/api/appointments", {
-           method: "POST",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify(Object.assign({}, data, {
-             start: start.toISOString(),
-             end: new Date(start.getTime() + 90*60000).toISOString()
-           }))
-         }); */
+      var submitBtn = form.querySelector(".form__submit");
+      clearError();
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
 
-      form.hidden = true;
-      confirmation.hidden = false;
-      window.scrollTo({ top: root.offsetTop - 40, behavior: "smooth" });
+      var end = new Date(start.getTime() + 90 * 60000);
+
+      fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.assign({}, data, {
+          start: start.toISOString(),
+          end: end.toISOString()
+        }))
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok || !body.ok) {
+              throw new Error(body.error || "We couldn't send your request. Please try again or call us.");
+            }
+            return body;
+          });
+        })
+        .then(function () {
+          if (url && calendarLink) {
+            calendarLink.href = url;
+            calendarLink.hidden = false;
+          }
+          form.hidden = true;
+          confirmation.hidden = false;
+          window.scrollTo({ top: root.offsetTop - 40, behavior: "smooth" });
+        })
+        .catch(function (err) {
+          fail(err.message || "Something went wrong. Please try again.", null);
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Request appointment";
+        });
     });
 
     if (resetBtn) {

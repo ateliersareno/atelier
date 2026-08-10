@@ -182,19 +182,6 @@ module.exports = async function handler(req, res) {
 
   try {
     const token = await getGraphToken();
-
-    await sendNotificationEmail(token, appt);
-
-    let calendarWarning = null;
-    try {
-      await createCalendarEvent(token, appt);
-    } catch (calErr) {
-      // Email already sent — don't fail the whole request over the calendar step.
-      calendarWarning = "calendar_not_created";
-      console.error("Calendar step failed (likely missing Calendars.ReadWrite permission):", calErr.message);
-    }
-
-    await sendAcknowledgmentEmail(token, appt);
 const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/Appointments`, {
   method: "POST",
   headers: {
@@ -216,8 +203,32 @@ const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/Appointment
 });
 
 if (!supabaseRes.ok) {
-  console.error("Supabase save failed:", await supabaseRes.text());
+  const errorText = await supabaseRes.text();
+
+  if (supabaseRes.status === 409) {
+    return res.status(409).json({
+      ok: false,
+      error: "That appointment time is no longer available."
+    });
+  }
+
+  console.error("Supabase save failed:", errorText);
+  throw new Error("Could not save appointment");
 }
+ 
+    await sendNotificationEmail(token, appt);
+
+    let calendarWarning = null;
+    try {
+      await createCalendarEvent(token, appt);
+    } catch (calErr) {
+      // Email already sent — don't fail the whole request over the calendar step.
+      calendarWarning = "calendar_not_created";
+      console.error("Calendar step failed (likely missing Calendars.ReadWrite permission):", calErr.message);
+    }
+
+    await sendAcknowledgmentEmail(token, appt);
+
     return res.status(200).json({
       ok: true,
       message: "Appointment request received.",

@@ -195,7 +195,7 @@ module.exports = async function handler(req, res) {
     }
 
     await sendAcknowledgmentEmail(token, appt);
-const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/appointments`, {
+const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/Appointments`, {
   method: "POST",
   headers: {
     apikey: process.env.SUPABASE_SECRET_KEY,

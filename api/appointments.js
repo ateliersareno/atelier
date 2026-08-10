@@ -195,7 +195,29 @@ module.exports = async function handler(req, res) {
     }
 
     await sendAcknowledgmentEmail(token, appt);
+const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/appointments`, {
+  method: "POST",
+  headers: {
+    apikey: process.env.SUPABASE_SECRET_KEY,
+    Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`,
+    "Content-Type": "application/json",
+    Prefer: "return=minimal"
+  },
+  body: JSON.stringify({
+    name: appt.name,
+    email: appt.email,
+    phone: appt.phone,
+    service: appt.service,
+    place: appt.place,
+    notes: appt.notes,
+    start: appt.start,
+    end: appt.end
+  })
+});
 
+if (!supabaseRes.ok) {
+  console.error("Supabase save failed:", await supabaseRes.text());
+}
     return res.status(200).json({
       ok: true,
       message: "Appointment request received.",

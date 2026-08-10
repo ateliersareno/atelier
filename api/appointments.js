@@ -154,10 +154,35 @@ async function createCalendarEvent(token, appt) {
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ ok: false, error: "Method not allowed." });
+ if (req.method === "GET") {
+  const supabaseRes = await fetch(
+    `${process.env.SUPABASE_URL}/rest/v1/Appointments?select=start`,
+    {
+      headers: {
+        apikey: process.env.SUPABASE_SECRET_KEY,
+        Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`
+      }
+    }
+  );
+
+  if (!supabaseRes.ok) {
+    return res.status(500).json({ ok: false, error: "Could not load availability." });
   }
+
+  const rows = await supabaseRes.json();
+
+  return res.status(200).json({
+    ok: true,
+    booked: rows.map(function (row) {
+      return row.start;
+    })
+  });
+}
+
+if (req.method !== "POST") {
+  res.setHeader("Allow", "GET, POST");
+  return res.status(405).json({ ok: false, error: "Method not allowed." });
+}
 
   let body = req.body;
   if (typeof body === "string") {

@@ -42,7 +42,21 @@
     var view = { year: today.getFullYear(), month: today.getMonth() };
     var selectedDate = null;
     var selectedTime = null;
-
+var bookedTimes = [];
+    fetch("/api/appointments")
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (data) {
+    if (data && data.ok && Array.isArray(data.booked)) {
+      bookedTimes = data.booked;
+      renderTimeSlots();
+      renderCalendar();
+    }
+  })
+  .catch(function () {
+    bookedTimes = [];
+  });
     /* weekday header */
     WEEKDAYS.forEach(function (d) {
       var s = document.createElement("span");
@@ -51,20 +65,42 @@
     });
 
     /* time slots */
-    TIME_SLOTS.forEach(function (label) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "time-slot";
-      b.textContent = label;
-      b.addEventListener("click", function () {
-        selectedTime = label;
-        Array.prototype.forEach.call(timesEl.children, function (el) {
-          el.classList.toggle("is-selected", el === b);
-        });
-        clearError();
-      });
-      timesEl.appendChild(b);
+    function renderTimeSlots() {
+  timesEl.innerHTML = "";
+  selectedTime = null;
+
+  if (!selectedDate) return;
+
+  TIME_SLOTS.forEach(function (label) {
+    var m = label.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    var hr = parseInt(m[1], 10) % 12;
+    if (m[3].toUpperCase() === "PM") hr += 12;
+
+    var slotDate = new Date(selectedDate.getTime());
+    slotDate.setHours(hr, parseInt(m[2], 10), 0, 0);
+
+    var isBooked = bookedTimes.some(function (booked) {
+      return new Date(booked).getTime() === slotDate.getTime();
     });
+
+    if (isBooked) return;
+
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "time-slot";
+    b.textContent = label;
+
+    b.addEventListener("click", function () {
+      selectedTime = label;
+      Array.prototype.forEach.call(timesEl.children, function (el) {
+        el.classList.toggle("is-selected", el === b);
+      });
+      clearError();
+    });
+
+    timesEl.appendChild(b);
+  });
+}
 
     function clearError() {
       if (errorEl) errorEl.textContent = "";
@@ -97,16 +133,29 @@
         (function (day) {
           var dateObj = new Date(view.year, view.month, day);
           var isPast = dateObj < today;
+          var isFull = TIME_SLOTS.every(function (label) {
+  var m = label.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  var hr = parseInt(m[1], 10) % 12;
+  if (m[3].toUpperCase() === "PM") hr += 12;
+
+  var slotDate = new Date(dateObj.getTime());
+  slotDate.setHours(hr, parseInt(m[2], 10), 0, 0);
+
+  return bookedTimes.some(function (booked) {
+    return new Date(booked).getTime() === slotDate.getTime();
+  });
+});
           var btn = document.createElement("button");
           btn.type = "button";
           btn.className = "calendar__day";
           btn.textContent = String(day);
-          btn.disabled = isPast;
+          btn.disabled = isPast || isFull;
           if (selectedDate && dateObj.toDateString() === selectedDate.toDateString()) {
             btn.classList.add("is-selected");
           }
           btn.addEventListener("click", function () {
             selectedDate = dateObj;
+            renderTimeSlots();
             renderCalendar();
             clearError();
           });
@@ -241,6 +290,9 @@
           });
         })
         .then(function () {
+          bookedTimes.push(start.toISOString());
+renderTimeSlots();
+renderCalendar();
           if (url && calendarLink) {
             calendarLink.href = url;
             calendarLink.hidden = false;

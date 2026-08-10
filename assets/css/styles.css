@@ -157,7 +157,9 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--cream);
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
 }
+
 .hero__lede {
   margin: 0;
   font-family: var(--serif);

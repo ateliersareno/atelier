@@ -290,7 +290,11 @@ var bookedTimes = [];
           });
         })
         .then(function () {
-          bookedTimes.push(start.toISOString());
+    window.location.href = "/thank-you.html";
+    bookedTimes.push(start.toISOString());
+    renderTimeSlots();
+    renderCalendar();
+  
 renderTimeSlots();
 renderCalendar();
           if (url && calendarLink) {

@@ -273,7 +273,7 @@ var bookedTimes = [];
 
       var end = new Date(start.getTime() + 90 * 60000);
 
-      fetch("/api/appointments", {
+      fetch("https://ateliersareno.app.n8n.cloud/webhook-test/a63cc751-4973-4b1b-bcfc-2f89641a65a6", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.assign({}, data, {

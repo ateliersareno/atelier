@@ -273,7 +273,7 @@ var bookedTimes = [];
 
       var end = new Date(start.getTime() + 90 * 60000);
 
-      fetch("https://ateliersareno.app.n8n.cloud/webhook-test/a63cc751-4973-4b1b-bcfc-2f89641a65a6", {
+      fetch("/api/appointment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.assign({}, data, {
@@ -283,7 +283,7 @@ var bookedTimes = [];
       })
         .then(function (res) {
           return res.json().catch(function () { return {}; }).then(function (body) {
-            if (!res.ok || !body.ok) {
+            if (!res.ok || !body.success) {
               throw new Error(body.error || "We couldn't send your request. Please try again or call us.");
             }
             return body;

@@ -241,6 +241,7 @@ var bookedTimes = [];
         name: name,
         email: email,
         phone: phone,
+        website: form.elements.website.value.trim(),
         service: form.elements.service.value,
         place: form.elements.place.value,
         notes: form.elements.notes.value.trim()

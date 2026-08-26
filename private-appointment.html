@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alterations for Women &amp; Men — Atelier Sareno</title>
+<meta name="description" content="Professional alterations, private fittings, bridal and formal gown alterations, and custom-made suits in Melville, NY.">
+<link rel="canonical" href="/private-appointment.html">
+<meta property="og:title" content="Alterations for Women &amp; Men — Atelier Sareno">
+<meta property="og:description" content="Professional alterations for everyday, evening and formal garments. Private fittings by appointment.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/service-alterations.webp">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=3">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18395568832"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18395568832');
+</script>
+<style>
+  .landing-page .landing-alterations {
+    margin-top: -36px;
+    margin-bottom: 52px;
+    padding: clamp(42px, 5.2vw, 68px) clamp(64px, 8vw, 104px);
+  }
+  .landing-page .landing-services { padding-bottom: 94px; }
+  .landing-page .landing-service { min-height: 0; padding: 50px 0; }
+  .landing-page .landing-custom { padding-top: 64px; padding-bottom: 64px; }
+  .landing-booking-section {
+    padding: clamp(72px, 9vw, 118px) 24px;
+    background: var(--landing-cream);
+    scroll-margin-top: 24px;
+  }
+  .landing-form-card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(32px, 5vw, 56px);
+    background: var(--landing-ivory);
+    border: 1px solid rgba(185, 146, 88, .28);
+  }
+  .landing-form-card .landing-kicker { text-align: center; }
+  .landing-form-card > h2 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 500;
+    line-height: 1.05;
+    text-align: center;
+    color: var(--landing-brown);
+  }
+  .landing-form-card .booking__lede { margin: 12px auto 26px; font-size: 16px; line-height: 1.6; }
+  .landing-form-card .form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr);
+    grid-template-areas:
+      "name phone"
+      "email service"
+      "place date"
+      "notes notes"
+      "error error"
+      "submit submit";
+    gap: 16px 24px;
+  }
+  .landing-field--name { grid-area: name; }
+  .landing-field--phone { grid-area: phone; }
+  .landing-field--email { grid-area: email; }
+  .landing-field--service { grid-area: service; }
+  .landing-field--place { grid-area: place; align-self: start; }
+  .landing-field--date { grid-area: date; }
+  .landing-field--notes { grid-area: notes; }
+  .landing-form-card .form__error { grid-area: error; margin: 0; }
+  .landing-form-card .form__submit { grid-area: submit; justify-self: start; margin-top: 0; }
+  .landing-form-card .field { gap: 5px; }
+  .landing-form-card .field input,
+  .landing-form-card .field textarea { padding: 7px 0; font-size: 16px; }
+  .landing-form-card .select-wrap select { padding: 11px 36px 11px 13px; font-size: 15px; }
+  .landing-form-card .calendar { padding: 14px; gap: 11px; }
+  .landing-form-card .calendar__day { width: 32px; height: 32px; }
+  .landing-form-card .time-slot { padding: 8px 11px; }
+  .landing-form-card .form__submit { background: var(--landing-nude); color: var(--landing-brown); border-color: rgba(185, 146, 88, .75); }
+  .landing-form-card .form__submit:hover { background: var(--landing-brown); color: var(--landing-cream); }
+  .landing-form-card .confirmation h2 { color: var(--landing-brown); }
+  @media (max-width: 900px) {
+    .landing-page .landing-alterations {
+      margin-top: -30px;
+      margin-bottom: 40px;
+      padding: 42px clamp(24px, 7vw, 56px);
+    }
+    .landing-page .landing-services { padding-bottom: 63px; }
+    .landing-page .landing-service { min-height: 0; padding: 44px 0; }
+    .landing-page .landing-custom { padding-top: 55px; padding-bottom: 55px; }
+  }
+  @media (max-width: 520px) {
+    .landing-page .landing-alterations {
+      margin-top: -26px;
+      margin-bottom: 34px;
+      padding: 34px 24px;
+    }
+    .landing-booking-section { padding: 64px 18px; }
+    .landing-form-card { padding: 40px 22px; }
+    .landing-form-card .form {
+      grid-template-columns: 1fr;
+      grid-template-areas: "name" "phone" "email" "service" "place" "date" "notes" "error" "submit";
+      gap: 18px;
+    }
+    .landing-form-card .field input,
+    .landing-form-card .field textarea { min-height: 44px; }
+    .landing-form-card .select-wrap select { min-height: 46px; }
+    .landing-form-card .calendar { padding: 14px 10px; }
+    .landing-form-card .calendar__day { width: 32px; height: 32px; }
+    .landing-form-card .form__submit { width: 100%; }
+  }
+</style>
+</head>
+<body class="landing-page">
+<header class="site-header landing-header">
+  <a class="wordmark" href="index.html">Atelier Sareno</a>
+  <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
+  <nav class="site-nav" id="primary-nav" data-nav aria-label="Primary">
+    <a href="#alterations" class="is-active">Alterations</a>
+    <a href="#custom-made">Custom-made</a>
+    <a href="appointment.html">Appointment</a>
+  </nav>
+  <span class="landing-header__note">By appointment only</span>
+</header>
+<main>
+  <section class="landing-hero" id="alterations">
+    <div class="landing-hero__copy">
+      <p class="landing-kicker">Atelier Sareno, Melville</p>
+      <h1>Alterations<br>for Women &amp; Men</h1>
+      <span class="landing-rule" aria-hidden="true"></span>
+      <p class="landing-intro">Professional alterations for everyday, evening and formal garments.</p>
+      <ul class="landing-list landing-list--inline" aria-label="Fitting details"><li>Private fittings</li><li>Precise finishing</li></ul>
+      <a class="landing-button" href="#private-fitting-form">Request an Appointment</a>
+    </div>
+    <figure class="landing-hero__media landing-photo-frame">
+      <img src="assets/img/service-alterations.webp" alt="A tailor precisely fitting the shoulder of a pinstriped jacket" width="294" height="440">
+    </figure>
+  </section>
+
+  <section class="landing-alterations" aria-labelledby="complete-alterations-title">
+    <div class="landing-alterations__intro">
+      <p class="landing-kicker">Tailored to you</p>
+      <h2 id="complete-alterations-title">Complete Alterations Services</h2>
+      <span class="landing-rule" aria-hidden="true"></span>
+      <p>From simple adjustments to complex fit corrections, we provide professional alterations for men&rsquo;s and women&rsquo;s garments.</p>
+    </div>
+    <ul class="landing-alterations__list" aria-label="Alterations offered">
+      <li>Suits</li><li>Dresses</li><li>Gowns</li><li>Trousers</li><li>Jackets</li>
+      <li>Sleeves</li><li>Hemming</li><li>Resizing</li><li>Fit Adjustments</li><li>Final Refinements</li>
+    </ul>
+  </section>
+
+  <div class="landing-services" aria-label="Alteration services">
+    <section class="landing-service">
+      <figure class="landing-service__media landing-photo-frame"><img src="assets/img/atelier-womens-evening.jpeg" alt="A white garment being carefully pinned during an alteration fitting" loading="lazy" width="736" height="1104"></figure>
+      <div class="landing-service__copy">
+        <h2>Women&rsquo;s &amp;<br>Evening Wear</h2><span class="landing-rule" aria-hidden="true"></span>
+        <ul class="landing-list"><li>Dresses &amp; gowns</li><li>Hemming &amp; resizing</li><li>Waist, sides &amp; sleeves</li><li>Straps, zippers &amp; restyling</li></ul>
+      </div>
+    </section>
+    <section class="landing-service landing-service--reverse">
+      <figure class="landing-service__media landing-photo-frame"><img src="assets/img/atelier-bridal-fitting.jpeg" alt="Detailed hand fitting of an embellished bridal gown" loading="lazy" width="736" height="981"></figure>
+      <div class="landing-service__copy">
+        <h2>Bridal &amp;<br>Formal Gowns</h2><span class="landing-rule" aria-hidden="true"></span>
+        <ul class="landing-list"><li>Bridal alterations</li><li>Formal &amp; occasion wear</li><li>Fit refinement</li><li>Final adjustments</li></ul>
+      </div>
+    </section>
+  </div>
+
+  <section class="landing-custom" id="custom-made">
+    <figure class="landing-custom__media"><img src="assets/img/atelier-office-hero.jpg" alt="Custom suits and tailoring materials in the Atelier Sareno studio" loading="lazy" width="3024" height="4032"></figure>
+    <div class="landing-custom__copy">
+      <h2>Custom-Made Suits<br>for Men and Women</h2>
+      <p class="landing-made">Made in Italy</p>
+      <ul class="landing-list"><li>Designed around the client</li><li>Fabric, lining, fit and finishing details</li></ul>
+      <a class="landing-button" href="#private-fitting-form">Private Fitting</a>
+    </div>
+  </section>
+
+  <section class="landing-booking-section" id="private-fitting-form" aria-labelledby="private-fitting-title">
+    <div class="booking landing-form-card" data-booking>
+      <p class="landing-kicker">By appointment only</p>
+      <h2 id="private-fitting-title">Request Your Private Fitting</h2>
+      <p class="booking__lede">Consultations run 60&ndash;90 minutes and can be held at our atelier or at your home or office. Tell us a little about what you have in mind and we&rsquo;ll confirm within one business day.</p>
+
+      <form class="form" data-form>
+        <div class="hp-field" aria-hidden="true" style="position:absolute;left:-9999px">
+          <label for="website">Leave this field empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="field landing-field--name">
+          <span class="field__label">Your name</span>
+          <input type="text" name="name" required placeholder="Full name" autocomplete="name">
+        </label>
+        <label class="field landing-field--email">
+          <span class="field__label">Email</span>
+          <input type="email" name="email" required placeholder="you@example.com" autocomplete="email">
+        </label>
+        <label class="field landing-field--phone">
+          <span class="field__label">Phone</span>
+          <input type="tel" name="phone" required placeholder="Phone number" autocomplete="tel">
+        </label>
+        <div class="field landing-field--service">
+          <span class="field__label">Service</span>
+          <div class="select-wrap">
+            <select name="service" aria-label="Service">
+              <option>Alterations</option>
+              <option>Men&rsquo;s Suit &amp; Formalwear Alterations</option>
+              <option>Women&rsquo;s &amp; Evening Wear Alterations</option>
+              <option>Bridal &amp; Formal Gown Alterations</option>
+              <option>Bespoke Suit Consultation — Women &amp; Men</option>
+            </select>
+          </div>
+        </div>
+        <div class="field landing-field--place">
+          <span class="field__label">Where</span>
+          <div class="select-wrap">
+            <select name="place" aria-label="Location">
+              <option>Atelier</option>
+              <option>At Your Location</option>
+            </select>
+          </div>
+        </div>
+        <div class="field landing-field--date">
+          <span class="field__label">Preferred date &amp; time</span>
+          <div class="calendar">
+            <div class="calendar__head">
+              <button class="calendar__nav" type="button" data-prev-month aria-label="Previous month">&lsaquo;</button>
+              <span class="calendar__month" data-month-label>&nbsp;</span>
+              <button class="calendar__nav" type="button" data-next-month aria-label="Next month">&rsaquo;</button>
+            </div>
+            <div class="calendar__weekdays" data-calendar-weekdays aria-hidden="true"></div>
+            <div class="calendar__grid" data-calendar-grid role="group" aria-label="Choose a date"></div>
+            <div class="calendar__times" data-calendar-times role="group" aria-label="Choose a time"></div>
+          </div>
+        </div>
+        <label class="field landing-field--notes">
+          <span class="field__label">Notes</span>
+          <textarea name="notes" rows="3" placeholder="Occasion, timeline, anything we should know"></textarea>
+        </label>
+        <p class="form__error" data-error role="alert"></p>
+        <button class="btn btn--brass form__submit" type="submit">Request appointment</button>
+      </form>
+
+      <div class="confirmation" data-confirmation hidden>
+        <span class="eyebrow">Request received</span>
+        <h2>Thank you — your appointment request has been received.</h2>
+        <p class="confirmation__note">This is a request, not a confirmed booking. Atelier Sareno will contact you to confirm within one business day.</p>
+        <div class="confirmation__summary" data-summary></div>
+        <div class="confirmation__actions">
+          <a class="btn btn--brass" data-calendar-link href="#" target="_blank" rel="noopener" hidden>Add to Google Calendar</a>
+          <button class="btn btn--ghost-dark" type="button" data-reset>Book another</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-studio" aria-labelledby="studio-title">
+    <p class="landing-kicker">Visit the studio</p><h2 id="studio-title">Atelier Sareno</h2>
+    <address>734 Walt Whitman Road<br>Suite 202<br>Melville, NY 11747</address>
+    <p>By appointment only</p>
+    <a class="landing-button" href="#private-fitting-form">Request an Appointment</a>
+  </section>
+</main>
+<footer class="landing-footer">
+  <span>&copy; <span data-year>2026</span> Atelier Sareno</span>
+  <a href="https://www.instagram.com/atelier_sareno/" target="_blank" rel="noopener">Instagram</a>
+</footer>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

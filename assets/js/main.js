@@ -291,20 +291,26 @@ var bookedTimes = [];
           });
         })
         .then(function () {
-    window.location.href = "/thank-you.html";
-    bookedTimes.push(start.toISOString());
-    renderTimeSlots();
-    renderCalendar();
-  
-renderTimeSlots();
-renderCalendar();
-          if (url && calendarLink) {
-            calendarLink.href = url;
-            calendarLink.hidden = false;
+          var redirected = false;
+          var redirectToThankYou = function () {
+            if (redirected) return;
+            redirected = true;
+            window.location.href = "/thank-you.html";
+          };
+
+          // Count a Google Ads conversion only after the appointment API confirms
+          // that the request was accepted. The callback gives the tracking beacon
+          // time to send, while the timeout prevents tracking from delaying users.
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "conversion", {
+              send_to: "AW-18395568832/OruXCOX2ruMcEMC12MNE",
+              event_callback: redirectToThankYou,
+              transport_type: "beacon"
+            });
+            window.setTimeout(redirectToThankYou, 1500);
+          } else {
+            redirectToThankYou();
           }
-          form.hidden = true;
-          confirmation.hidden = false;
-          window.scrollTo({ top: root.offsetTop - 40, behavior: "smooth" });
         })
         .catch(function (err) {
           fail(err.message || "Something went wrong. Please try again.", null);

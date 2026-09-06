@@ -17,9 +17,13 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 <style>
   /* Homepage readability refinement — preserves the original centered design */
+  .hero {
+    justify-content: flex-end;
+  }
+
   .hero__scrim {
     background:
-      radial-gradient(ellipse 42% 52% at 50% 48%,
+      radial-gradient(ellipse 42% 52% at 72% 48%,
         rgba(10, 14, 20, .52) 0%,
         rgba(10, 14, 20, .34) 46%,
         rgba(10, 14, 20, .12) 72%,
@@ -30,6 +34,7 @@
   .hero__inner {
     width: min(100%, 720px);
     max-width: 720px;
+    margin: 0 clamp(4vw, 7vw, 110px) 0 0;
     gap: 22px;
   }
 
@@ -72,6 +77,10 @@
   }
 
   @media (max-width: 720px) {
+    .hero {
+      justify-content: center;
+    }
+
     .hero__scrim {
       background:
         radial-gradient(ellipse 78% 48% at 50% 48%,
@@ -82,6 +91,7 @@
     }
 
     .hero__inner {
+      margin: 0;
       padding: 64px 20px 44px;
       gap: 20px;
     }

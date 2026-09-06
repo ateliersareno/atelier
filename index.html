@@ -16,55 +16,83 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
 <style>
-  /* Homepage typography refinement — preserves the original centered layout */
+  /* Homepage readability refinement — preserves the original centered design */
   .hero__scrim {
-    background: linear-gradient(90deg,
-      rgba(12, 15, 20, .58) 0%,
-      rgba(12, 15, 20, .52) 50%,
-      rgba(12, 15, 20, .46) 100%);
+    background:
+      radial-gradient(ellipse 42% 52% at 50% 48%,
+        rgba(10, 14, 20, .52) 0%,
+        rgba(10, 14, 20, .34) 46%,
+        rgba(10, 14, 20, .12) 72%,
+        rgba(10, 14, 20, .04) 100%),
+      rgba(10, 14, 20, .08);
   }
 
   .hero__inner {
-    max-width: 780px;
-    gap: 28px;
+    width: min(100%, 720px);
+    max-width: 720px;
+    gap: 22px;
   }
 
   .hero__title {
-    max-width: 13ch;
-    font-size: clamp(46px, 5.2vw, 78px);
-    line-height: 1.04;
-    letter-spacing: -.015em;
-    text-wrap: balance;
-    text-shadow: 0 3px 18px rgba(0, 0, 0, .72);
+    max-width: none;
+    font-size: clamp(42px, 4.6vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -.012em;
+    text-shadow:
+      0 2px 3px rgba(0, 0, 0, .72),
+      0 8px 24px rgba(0, 0, 0, .44);
+  }
+
+  .hero__title span {
+    display: block;
   }
 
   .hero__lede {
-    max-width: 48ch;
-    font-size: clamp(19px, 1.8vw, 24px);
-    line-height: 1.55;
+    max-width: 46ch;
+    font-size: clamp(18px, 1.55vw, 22px);
+    line-height: 1.5;
     font-weight: 400;
-    text-wrap: balance;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, .78);
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, .86),
+      0 5px 14px rgba(0, 0, 0, .52);
+  }
+
+  .hero__actions {
+    margin-top: 2px;
   }
 
   .hero__actions .btn,
   .hero__stats {
-    text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, .62);
+  }
+
+  .hero__stats {
+    margin-top: 2px;
+    padding-top: 18px;
   }
 
   @media (max-width: 720px) {
+    .hero__scrim {
+      background:
+        radial-gradient(ellipse 78% 48% at 50% 48%,
+          rgba(10, 14, 20, .56) 0%,
+          rgba(10, 14, 20, .30) 52%,
+          rgba(10, 14, 20, .08) 100%),
+        rgba(10, 14, 20, .08);
+    }
+
     .hero__inner {
-      padding: 72px 22px 48px;
-      gap: 24px;
+      padding: 64px 20px 44px;
+      gap: 20px;
     }
 
     .hero__title {
-      font-size: clamp(40px, 13vw, 58px);
+      font-size: clamp(38px, 11vw, 54px);
     }
 
     .hero__lede {
-      font-size: 18px;
-      line-height: 1.5;
+      font-size: 17px;
+      line-height: 1.48;
     }
   }
 </style>
@@ -103,7 +131,7 @@
     -->
     <div class="hero__scrim"></div>
     <div class="hero__inner">
-      <h1 class="hero__title">Bespoke Man and Women Suits</h1>
+      <h1 class="hero__title"><span>Bespoke Man and</span><span>Women Suits</span></h1>
       <p class="hero__lede">We bring Italy to you — mills of Biella, hands of the atelier, a suit that could only be yours.</p>
       <div class="hero__actions">
         <a class="btn btn--ghost-light" href="appointment.html">Book a consultation</a>

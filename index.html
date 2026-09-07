@@ -22,9 +22,9 @@
     flex-direction: column;
     justify-content: center;
     gap: 16px;
-    padding: 16px 48px 14px;
-    background: #050505;
-    border-bottom: 1px solid rgba(209, 173, 114, .25);
+    padding: 18px 48px 16px;
+    background: #f8f5ef;
+    border-bottom: 1px solid rgba(43, 37, 32, .14);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -34,7 +34,7 @@
     grid-template-columns: auto 1px auto;
     align-items: center;
     column-gap: clamp(22px, 3vw, 48px);
-    color: #f5f1e9;
+    color: #2b2520;
     font-family: var(--serif);
     font-size: clamp(40px, 4.8vw, 68px);
     font-weight: 300;
@@ -46,18 +46,7 @@
   .home-masthead__divider {
     width: 1px;
     height: .82em;
-    background: rgba(245, 241, 233, .72);
-  }
-
-  .home-masthead__submark {
-    grid-column: 1 / -1;
-    margin-top: 13px;
-    padding-left: .62em;
-    color: rgba(245, 241, 233, .84);
-    font-size: 12px;
-    line-height: 1;
-    letter-spacing: .62em;
-    text-align: center;
+    background: rgba(43, 37, 32, .55);
   }
 
   .home-masthead .site-nav {
@@ -67,7 +56,7 @@
     letter-spacing: .08em;
   }
 
-  .home-masthead .site-nav a { color: #f5f1e9; }
+  .home-masthead .site-nav a { color: #2b2520; }
   .home-masthead .site-nav a.is-active,
   .home-masthead .site-nav a:hover { color: #d1ad72; }
 
@@ -129,7 +118,7 @@
 
   @media (max-width: 720px) {
     .home-masthead {
-      min-height: 112px;
+      min-height: 92px;
       padding: 22px 62px 22px 20px;
       align-items: center;
     }
@@ -140,28 +129,22 @@
       letter-spacing: .12em;
     }
 
-    .home-masthead__submark {
-      margin-top: 15px;
-      font-size: 10px;
-      letter-spacing: .48em;
-    }
-
     .home-masthead .nav-toggle {
       position: absolute;
       top: 22px;
       right: 18px;
-      color: #f5f1e9;
-      border-color: rgba(245, 241, 233, .35);
+      color: #2b2520;
+      border-color: rgba(43, 37, 32, .3);
     }
 
     .home-masthead .site-nav {
       top: 100%;
-      background: #050505;
+      background: #f8f5ef;
     }
 
     .home-masthead .site-nav a {
-      color: #f5f1e9;
-      border-bottom-color: rgba(245, 241, 233, .14);
+      color: #2b2520;
+      border-bottom-color: rgba(43, 37, 32, .12);
     }
 
     .hero { justify-content: center; }
@@ -206,7 +189,6 @@
 <header class="site-header home-masthead">
   <a class="home-masthead__brand" href="index.html" aria-label="Atelier Sareno home">
     <span>Atelier</span><span class="home-masthead__divider" aria-hidden="true"></span><span>Sareno</span>
-    <small class="home-masthead__submark">Bespoke</small>
   </a>
   <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
   <nav class="site-nav" id="primary-nav" data-nav aria-label="Primary">

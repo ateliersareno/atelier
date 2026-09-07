@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Fabrics — Atelier Sareno</title>
+  <meta name="description" content="Explore the exceptional fabric houses and personalized cloth selection available at Atelier Sareno.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260907-2">
+  <style>
+    .fabrics-page { background: #f8f5ef; }
+    .fabrics-hero {
+      min-height: 68vh;
+      padding: 110px 48px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--cream);
+      background:
+        linear-gradient(rgba(14,18,24,.58), rgba(14,18,24,.62)),
+        url("assets/img/home-fitting.jpeg") center 45% / cover;
+    }
+    .fabrics-hero__inner { max-width: 850px; }
+    .fabrics-kicker {
+      margin: 0 0 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: #d1ad72;
+    }
+    .fabrics-hero h1 {
+      font-size: clamp(58px, 8vw, 112px);
+      font-weight: 300;
+      line-height: .92;
+    }
+    .fabrics-hero p:last-child {
+      max-width: 650px;
+      margin: 30px auto 0;
+      font-family: var(--serif);
+      font-size: clamp(20px, 2vw, 27px);
+      line-height: 1.5;
+    }
+    .fabrics-intro {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 110px 30px 90px;
+      text-align: center;
+    }
+    .fabrics-intro h2,
+    .fabrics-personal h2,
+    .fabrics-cta h2 {
+      font-size: clamp(42px, 5.2vw, 72px);
+      font-weight: 300;
+      line-height: 1;
+    }
+    .fabrics-intro p,
+    .fabrics-personal p {
+      margin: 28px auto 0;
+      font-size: 17px;
+      line-height: 1.8;
+      color: rgba(36,31,26,.76);
+    }
+    .fabric-houses {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 30px 120px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(176,141,87,.28);
+    }
+    .fabric-house {
+      padding: clamp(44px, 6vw, 76px);
+      background: #f8f5ef;
+    }
+    .fabric-house__number {
+      display: block;
+      margin-bottom: 34px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--brass);
+    }
+    .fabric-house h3 {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1;
+    }
+    .fabric-house p {
+      margin: 20px 0 0;
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(36,31,26,.72);
+    }
+    .fabrics-personal {
+      padding: 110px 30px;
+      background: #1b1918;
+      color: var(--dark-text);
+      text-align: center;
+    }
+    .fabrics-personal__inner { max-width: 980px; margin: 0 auto; }
+    .fabrics-personal p { max-width: 700px; color: rgba(241,236,227,.74); }
+    .fabrics-list {
+      margin: 55px auto 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      list-style: none;
+      border-top: 1px solid rgba(241,236,227,.16);
+      border-bottom: 1px solid rgba(241,236,227,.16);
+    }
+    .fabrics-list li {
+      padding: 26px 12px;
+      border-right: 1px solid rgba(241,236,227,.16);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .fabrics-list li:last-child { border-right: 0; }
+    .fabrics-cta { padding: 110px 30px; text-align: center; }
+    .fabrics-cta p { margin: 24px auto 0; max-width: 580px; line-height: 1.75; }
+    .fabrics-cta .btn { margin-top: 34px; }
+    @media (max-width: 760px) {
+      .fabrics-hero { min-height: 58vh; padding: 80px 24px; }
+      .fabrics-intro { padding: 80px 24px 65px; }
+      .fabric-houses { grid-template-columns: 1fr; padding: 0 20px 80px; }
+      .fabrics-personal, .fabrics-cta { padding: 80px 24px; }
+      .fabrics-list { grid-template-columns: 1fr 1fr; }
+      .fabrics-list li:nth-child(2) { border-right: 0; }
+      .fabrics-list li:nth-child(-n+2) { border-bottom: 1px solid rgba(241,236,227,.16); }
+    }
+  </style>
+</head>
+<body class="fabrics-page">
+  <header class="site-header">
+    <a class="wordmark" href="index.html">Atelier Sareno</a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="site-nav" id="primary-nav" data-nav aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="appointment.html">Appointment</a>
+      <a href="services.html">Services</a>
+      <a href="our-fabrics.html" class="is-active">Our Fabrics</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <section class="fabrics-hero">
+      <div class="fabrics-hero__inner">
+        <p class="fabrics-kicker">Cloth · Character · Craft</p>
+        <h1>Our Fabrics</h1>
+        <p>The world’s finest fabrics, thoughtfully selected and made personal to you.</p>
+      </div>
+    </section>
+    <section class="fabrics-intro">
+      <p class="fabrics-kicker">The Foundation of Every Garment</p>
+      <h2>It begins with the cloth</h2>
+      <p>We work with some of the world’s most respected fabric houses, offering an exceptional selection of colors, textures, weights, patterns, and finishes. The right fabric defines how a garment feels, moves, drapes, and represents you.</p>
+    </section>
+    <section class="fabric-houses" aria-label="Our fabric houses">
+      <article class="fabric-house"><span class="fabric-house__number">01 · ITALY</span><h3>Loro Piana</h3><p>Exceptional softness, refinement, and some of the world’s finest natural fibers for understated elegance at its highest level.</p></article>
+      <article class="fabric-house"><span class="fabric-house__number">02 · ITALY</span><h3>Ermenegildo Zegna</h3><p>Sophisticated cloth that combines traditional craftsmanship, modern innovation, performance, and timeless elegance.</p></article>
+      <article class="fabric-house"><span class="fabric-house__number">03 · ENGLAND</span><h3>Dormeuil</h3><p>Distinctive fabrics, innovative blends, and refined character—from quietly elegant to confidently expressive.</p></article>
+      <article class="fabric-house"><span class="fabric-house__number">04 · ENGLAND</span><h3>Holland &amp; Sherry</h3><p>Exceptional British cloth, rich textures, refined patterns, and an extensive range for business, formal, and statement tailoring.</p></article>
+    </section>
+    <section class="fabrics-personal">
+      <div class="fabrics-personal__inner">
+        <p class="fabrics-kicker">Personalization</p>
+        <h2>Chosen around you</h2>
+        <p>During your private consultation, we guide you toward a cloth that suits your personal style, lifestyle, profession, climate, and occasion.</p>
+        <ul class="fabrics-list"><li>Color &amp; Pattern</li><li>Weight &amp; Season</li><li>Texture &amp; Drape</li><li>Purpose &amp; Lifestyle</li></ul>
+      </div>
+    </section>
+    <section class="fabrics-cta">
+      <p class="fabrics-kicker">Private Consultation</p>
+      <h2>Discover your fabric</h2>
+      <p>Explore our collections in person and create a garment that feels entirely your own.</p>
+      <a class="btn btn--brass" href="appointment.html">Request an appointment</a>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer__mark">Atelier Sareno</div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="our-fabrics.html">Our Fabrics</a><a href="appointment.html">Appointment</a><a href="https://www.instagram.com/atelier_sareno/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <div class="site-footer__legal">&copy; <span data-year>2026</span> Atelier Sareno</div>
+  </footer>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

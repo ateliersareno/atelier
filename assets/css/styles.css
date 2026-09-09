@@ -382,6 +382,30 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   gap: 24px;
   border-right: 1px solid rgba(36, 31, 26, 0.1);
 }
+.duo__text--about {
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #171310;
+}
+.duo__text--about h1 {
+  margin-bottom: 24px;
+  font-family: var(--serif);
+  font-size: clamp(42px, 4vw, 66px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.015em;
+}
+.duo__text--about p {
+  max-width: 42ch;
+  margin: 0 auto 20px;
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.45vw, 22px);
+  font-weight: 400;
+  line-height: 1.48;
+  color: #171310;
+}
 .eyebrow {
   font-family: var(--mono);
   font-size: 11px;
@@ -840,4 +864,20 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 300; }
   .landing-button { width: 100%; min-width: 0; }
   .landing-studio { padding: 88px 24px; }
   .landing-footer { flex-direction: column; align-items: center; text-align: center; }
+}
+
+/* ---------- unified luxury body typography ---------- */
+body p:not(.hero__lede):not(.fabrics-kicker):not(.fabrics-intro__statement):not(.landing-kicker):not(.form__error):not(.confirmation__note) {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: .004em;
+}
+body:not(.page--dark):not(.landing-page) p:not(.hero__lede):not(.form__error):not(.confirmation__note),
+.landing-page p:not(.landing-kicker):not(.form__error):not(.confirmation__note) {
+  color: #171310;
+}
+.page--dark p:not(.form__error):not(.confirmation__note) {
+  color: #f1ece3;
 }

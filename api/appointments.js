@@ -99,6 +99,30 @@ async function sendNotificationEmail(token, appt) {
 }
 
 async function sendAcknowledgmentEmail(token, appt) {
+  const requested = new Date(appt.start).toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+
+  const html = `
+    <div style="font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.6;max-width:640px;margin:0 auto;">
+      <p>Dear ${appt.name},</p>
+      <p>Thank you for your appointment request with Atelier Sareno.</p>
+      <p>
+        <strong>Service:</strong> ${appt.service}<br>
+        <strong>Requested:</strong> ${requested} ET<br>
+        <strong>Location:</strong> ${locationText(appt.place)}
+      </p>
+      <p>This is a request, not yet a confirmed booking. We will contact you within one business day to confirm your appointment.</p>
+      <p>If you have any questions, simply reply to this email.</p>
+      <p style="margin-top:28px;">Respectfully,<br><strong>Atelier Sareno</strong><br>${STUDIO_ADDRESS}</p>
+    </div>`;
+
   const res = await fetch(`https://graph.microsoft.com/v1.0/users/${MAILBOX}/sendMail`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
@@ -106,14 +130,11 @@ async function sendAcknowledgmentEmail(token, appt) {
       message: {
         subject: "Atelier Sareno — we received your appointment request",
         body: {
-          contentType: "Text",
-          content: `Hi ${appt.name},\n\nThank you for your appointment request for ${appt.service}. ` +
-            `This is a request, not yet a confirmed booking — Atelier Sareno will be in touch within one business day to confirm.\n\n` +
-            `Requested: ${new Date(appt.start).toLocaleString("en-US", { timeZone: "America/New_York" })} (ET)\n` +
-            `Location: ${locationText(appt.place)}\n\n` +
-            `Atelier Sareno\n${STUDIO_ADDRESS}`
+          contentType: "HTML",
+          content: html
         },
-        toRecipients: [{ emailAddress: { address: appt.email } }]
+        toRecipients: [{ emailAddress: { address: appt.email } }],
+        replyTo: [{ emailAddress: { address: MAILBOX, name: "Atelier Sareno" } }]
       },
       saveToSentItems: false
     })

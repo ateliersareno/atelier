@@ -8,6 +8,7 @@
 //   MS_TENANT_ID
 //   MS_CLIENT_SECRET
 //   MS_MAILBOX            (defaults to info@ateliersareno.com if unset)
+//   RESEND_API_KEY         (used only for customer acknowledgment emails)
 //
 // Required Microsoft Graph application permissions (admin consent granted):
 //   Mail.Send                — already granted, used for both emails
@@ -98,7 +99,13 @@ async function sendNotificationEmail(token, appt) {
   }
 }
 
-async function sendAcknowledgmentEmail(token, appt) {
+async function sendAcknowledgmentEmail(appt) {
+  const resendKey = process.env.RESEND_API_KEY;
+  if (!resendKey) {
+    console.error("RESEND_API_KEY is not configured; skipping customer acknowledgment.");
+    return;
+  }
+
   const requested = new Date(appt.start).toLocaleString("en-US", {
     timeZone: "America/New_York",
     weekday: "long",
@@ -123,26 +130,25 @@ async function sendAcknowledgmentEmail(token, appt) {
       <p style="margin-top:28px;">Respectfully,<br><strong>Atelier Sareno</strong><br>${STUDIO_ADDRESS}</p>
     </div>`;
 
-  const res = await fetch(`https://graph.microsoft.com/v1.0/users/${MAILBOX}/sendMail`, {
+  const resendRes = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${resendKey}`,
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
-      message: {
-        subject: "Atelier Sareno — we received your appointment request",
-        body: {
-          contentType: "HTML",
-          content: html
-        },
-        toRecipients: [{ emailAddress: { address: appt.email } }],
-        replyTo: [{ emailAddress: { address: MAILBOX, name: "Atelier Sareno" } }]
-      },
-      saveToSentItems: false
+      from: "Atelier Sareno <info@ateliersareno.com>",
+      to: [appt.email],
+      subject: "Atelier Sareno — we received your appointment request",
+      html,
+      reply_to: MAILBOX
     })
   });
-  if (!res.ok) {
-    const errBody = await res.json().catch(() => ({}));
-    console.error("Graph sendMail (ack) error:", errBody.error);
-    // Non-fatal — the request still succeeded.
+
+  if (!resendRes.ok) {
+    const errBody = await resendRes.text().catch(() => "");
+    console.error("Resend acknowledgment error:", resendRes.status, errBody);
+    // Non-fatal — the appointment request is already saved.
   }
 }
 
@@ -273,7 +279,7 @@ if (!supabaseRes.ok) {
       console.error("Calendar step failed (likely missing Calendars.ReadWrite permission):", calErr.message);
     }
 
-    await sendAcknowledgmentEmail(token, appt);
+    await sendAcknowledgmentEmail(appt);
 
     return res.status(200).json({
       ok: true,

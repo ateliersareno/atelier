@@ -274,7 +274,7 @@ var bookedTimes = [];
 
       var end = new Date(start.getTime() + 90 * 60000);
 
-      fetch("/api/appointment", {
+      fetch("/api/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.assign({}, data, {
@@ -284,7 +284,7 @@ var bookedTimes = [];
       })
         .then(function (res) {
           return res.json().catch(function () { return {}; }).then(function (body) {
-            if (!res.ok || !body.success) {
+            if (!res.ok || !(body.ok || body.success)) {
               throw new Error(body.error || "We couldn't send your request. Please try again or call us.");
             }
             return body;

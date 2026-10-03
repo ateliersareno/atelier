@@ -882,3 +882,35 @@ body:not(.page--dark):not(.landing-page) p:not(.hero__lede):not(.form__error):no
 .page--dark p:not(.form__error):not(.confirmation__note) {
   color: #f1ece3;
 }
+
+/* Contact details and social links match the About body text on every page. */
+.contact-block,
+.booking__contact,
+.landing-studio address,
+.site-footer__nav,
+.site-footer__legal,
+.landing-footer {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: .004em;
+  font-style: normal;
+  text-transform: none;
+}
+.contact-block > span,
+.contact-block > a:not(.btn),
+.booking__contact > span,
+.booking__contact > a,
+.site-footer__nav > a,
+.landing-footer > a {
+  font: inherit;
+  letter-spacing: inherit;
+}
+.contact-block > span,
+.contact-block > a:not(.btn),
+.booking__contact > span,
+.booking__contact > a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}

@@ -193,6 +193,25 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-18395568832');
+    // Only a successful form response can create this marker.
+    // Consume it before queuing the event to prevent refresh/back duplicates.
+    (function () {
+      try {
+        var key = "atelier_appointment_conversion";
+        var raw = window.sessionStorage.getItem(key);
+        if (!raw) return;
+        window.sessionStorage.removeItem(key);
+        var request = JSON.parse(raw);
+        var age = Date.now() - request.createdAt;
+        if (!request.id || !Number.isFinite(age) || age < 0 || age > 10 * 60 * 1000) return;
+        gtag("event", "conversion", {
+          send_to: "AW-18395568832/OruXCOX2ruMcEMC12MNE",
+          transaction_id: request.id
+        });
+      } catch (storageError) {
+        // The confirmation remains usable when browser storage is unavailable.
+      }
+    })();
   </script>
 <!-- Meta Pixel Code -->
 <script>

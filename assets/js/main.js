@@ -291,23 +291,35 @@ var bookedTimes = [];
           });
         })
         .then(function () {
+          // Carry only a short-lived success marker, never customer details.
+          // Measure on the confirmation page so navigation cannot interrupt it.
+          try {
+            var requestId = window.crypto && window.crypto.randomUUID
+              ? window.crypto.randomUUID()
+              : Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+            window.sessionStorage.setItem("atelier_appointment_conversion", JSON.stringify({
+              id: requestId,
+              createdAt: Date.now()
+            }));
+            window.location.href = "/thank-you.html";
+            return;
+          } catch (storageError) {
+            // Storage may be disabled. Keep the original callback-based fallback.
+          }
+
           var redirected = false;
           var redirectToThankYou = function () {
             if (redirected) return;
             redirected = true;
             window.location.href = "/thank-you.html";
           };
-
-          // Count a Google Ads conversion only after the appointment API confirms
-          // that the request was accepted. The callback gives the tracking beacon
-          // time to send, while the timeout prevents tracking from delaying users.
           if (typeof window.gtag === "function") {
             window.gtag("event", "conversion", {
               send_to: "AW-18395568832/OruXCOX2ruMcEMC12MNE",
               event_callback: redirectToThankYou,
-              transport_type: "beacon"
+              event_timeout: 2500
             });
-            window.setTimeout(redirectToThankYou, 1500);
+            window.setTimeout(redirectToThankYou, 3000);
           } else {
             redirectToThankYou();
           }

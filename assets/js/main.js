@@ -244,7 +244,8 @@ var bookedTimes = [];
         website: form.elements.website.value.trim(),
         service: form.elements.service.value,
         place: form.elements.place.value,
-        notes: form.elements.notes.value.trim()
+        notes: form.elements.notes.value.trim(),
+        sms_consent: !!(form.elements.sms_consent && form.elements.sms_consent.checked)
       };
 
       var start = buildStart();

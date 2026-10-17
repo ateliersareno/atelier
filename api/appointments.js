@@ -1,3 +1,4 @@
+const { consentRecord } = require('../lib/consent');
 const { createApproval, escape } = require('../lib/approval');
 // Vercel serverless function — POST /api/appointments
 // Validates the request, sends a notification email via Microsoft Graph
@@ -75,6 +76,7 @@ async function sendNotificationEmail(token, appt, approvalUrl) {
     `Name: ${appt.name}`,
     `Email: ${appt.email}`,
     `Phone: ${appt.phone}`,
+    `SMS permission: ${appt.smsConsent ? "Opted in via appointment form" : "Not provided — do not enroll in SMS"}`,
     `Service: ${appt.service}`,
     `Location: ${locationText(appt.place)}`,
     `Requested date/time: ${new Date(appt.start).toLocaleString("en-US", { timeZone: "America/New_York" })} (ET)`,
@@ -205,7 +207,8 @@ if (req.method !== "POST") {
     place: String(body.place || "").trim(),
     notes: String(body.notes || "").trim(),
     start: body.start,
-    end: body.end
+    end: body.end,
+    smsConsent: body.sms_consent === true
   };
 
   try {
@@ -226,7 +229,8 @@ const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/Appointment
     place: appt.place,
     notes: appt.notes,
     start: appt.start,
-    end: appt.end
+    end: appt.end,
+    ...consentRecord(body)
   })
 });
 

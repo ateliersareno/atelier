@@ -157,8 +157,9 @@ async function sendAcknowledgmentEmail(appt) {
 
 module.exports = async function handler(req, res) {
  if (req.method === "GET") {
+  res.setHeader("Cache-Control", "no-store");
   const supabaseRes = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/Appointments?select=start`,
+    `${process.env.SUPABASE_URL}/rest/v1/Appointments?select=start&or=(status.is.null,status.neq.cancelled)`,
     {
       headers: {
         apikey: process.env.SUPABASE_SECRET_KEY,

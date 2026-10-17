@@ -1,7 +1,9 @@
+const { createApproval, escape } = require('../lib/approval');
 // Vercel serverless function — POST /api/appointments
 // Validates the request, sends a notification email via Microsoft Graph
-// (client-credentials flow), creates a calendar event on info@ateliersareno.com,
-// and sends the customer an acknowledgment email.
+// (client-credentials flow), creates a private owner review link,
+// and sends the customer an acknowledgment email. Calendar creation happens
+// only after owner approval via /api/appointment-approval.
 //
 // Required Vercel env vars (names — confirm against your actual project settings):
 //   MS_CLIENT_ID
@@ -68,7 +70,7 @@ function locationText(place) {
   return place === "Atelier" ? STUDIO_ADDRESS : (place || "");
 }
 
-async function sendNotificationEmail(token, appt) {
+async function sendNotificationEmail(token, appt, approvalUrl) {
   const lines = [
     `Name: ${appt.name}`,
     `Email: ${appt.email}`,
@@ -85,7 +87,7 @@ async function sendNotificationEmail(token, appt) {
     body: JSON.stringify({
       message: {
         subject: `New appointment request — ${appt.name} (${appt.service})`,
-        body: { contentType: "Text", content: lines.join("\n") },
+        body: { contentType: "HTML", content: `<div style="font-family:Arial,sans-serif;line-height:1.6"><h2>New appointment request</h2><p>${lines.map(escape).join("<br>")}</p><p><a href="${escape(approvalUrl)}" style="display:inline-block;padding:14px 22px;background:#293e36;color:white;text-decoration:none">Review &amp; confirm appointment</a></p><p>Review or adjust the date, time and address before sending the client a confirmation. This private link expires in 14 days. Do not forward it.</p></div>` },
         toRecipients: [{ emailAddress: { address: MAILBOX } }],
         replyTo: [{ emailAddress: { address: appt.email, name: appt.name } }]
       },
@@ -118,12 +120,12 @@ async function sendAcknowledgmentEmail(appt) {
 
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.6;max-width:640px;margin:0 auto;">
-      <p>Dear ${appt.name},</p>
+      <p>Dear ${escape(appt.name)},</p>
       <p>Thank you for your appointment request with Atelier Sareno.</p>
       <p>
-        <strong>Service:</strong> ${appt.service}<br>
+        <strong>Service:</strong> ${escape(appt.service)}<br>
         <strong>Requested:</strong> ${requested} ET<br>
-        <strong>Location:</strong> ${locationText(appt.place)}
+        <strong>Location:</strong> ${escape(locationText(appt.place))}
       </p>
       <p>This is a request, not yet a confirmed booking. We will contact you within one business day to confirm your appointment.</p>
       <p>If you have any questions, simply reply to this email.</p>
@@ -152,33 +154,6 @@ async function sendAcknowledgmentEmail(appt) {
   }
 }
 
-async function createCalendarEvent(token, appt) {
-  const res = await fetch(`https://graph.microsoft.com/v1.0/users/${MAILBOX}/events`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      subject: `${appt.name} — ${appt.service}`,
-      body: {
-        contentType: "Text",
-        content: [
-          `Email: ${appt.email}`,
-          `Phone: ${appt.phone}`,
-          `Service: ${appt.service}`,
-          `Location: ${locationText(appt.place)}`,
-          appt.notes ? `Notes: ${appt.notes}` : null
-        ].filter(Boolean).join("\n")
-      },
-      start: { dateTime: appt.start, timeZone: "UTC" },
-      end: { dateTime: appt.end, timeZone: "UTC" },
-      location: { displayName: locationText(appt.place) || "Atelier Sareno" }
-    })
-  });
-  if (!res.ok) {
-    const errBody = await res.json().catch(() => ({}));
-    console.error("Graph create event error:", errBody.error);
-    throw new Error("CALENDAR_PERMISSION_OR_API_ERROR");
-  }
-}
 
 module.exports = async function handler(req, res) {
  if (req.method === "GET") {
@@ -240,7 +215,7 @@ const supabaseRes = await fetch(`${process.env.SUPABASE_URL}/rest/v1/Appointment
     apikey: process.env.SUPABASE_SECRET_KEY,
     Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`,
     "Content-Type": "application/json",
-    Prefer: "return=minimal"
+    Prefer: "return=representation"
   },
   body: JSON.stringify({
     name: appt.name,
@@ -268,23 +243,15 @@ if (!supabaseRes.ok) {
   throw new Error("Could not save appointment");
 }
  
-    await sendNotificationEmail(token, appt);
-
-    let calendarWarning = null;
-    try {
-      await createCalendarEvent(token, appt);
-    } catch (calErr) {
-      // Email already sent — don't fail the whole request over the calendar step.
-      calendarWarning = "calendar_not_created";
-      console.error("Calendar step failed (likely missing Calendars.ReadWrite permission):", calErr.message);
-    }
+    const saved = await supabaseRes.json();
+    const approvalUrl = await createApproval(saved[0].id);
+    await sendNotificationEmail(token, appt, approvalUrl);
 
     await sendAcknowledgmentEmail(appt);
 
     return res.status(200).json({
       ok: true,
-      message: "Appointment request received.",
-      calendarWarning
+      message: "Appointment request received."
     });
   } catch (err) {
     console.error("Appointment submission failed:", err.message);

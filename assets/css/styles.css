@@ -914,3 +914,17 @@ body:not(.page--dark):not(.landing-page) p:not(.hero__lede):not(.form__error):no
   max-width: 100%;
   overflow-wrap: anywhere;
 }
+
+/* Original showroom and garment photographs, October 2026. */
+.atelier-gallery { padding: clamp(48px,7vw,100px) clamp(20px,5vw,80px); background: #f6f2eb; }
+.atelier-gallery__intro { max-width: 700px; margin: 0 auto 38px; text-align: center; }
+.atelier-gallery__eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: 13px; }
+.atelier-gallery h2 { font-family: var(--serif); font-size: clamp(34px,4vw,52px); font-weight: 400; line-height: 1.1; margin: 12px 0 20px; }
+.atelier-gallery__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px 20px; }
+.atelier-gallery figure { margin: 0; min-width: 0; }
+.atelier-gallery figure a { display: block; }
+.atelier-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; }
+.atelier-gallery figcaption { font-family: var(--serif); font-size: 23px; color: #29231e; padding-top: 10px; }
+.atelier-gallery__action { margin-top: 40px; text-align: center; }
+@media(max-width: 1000px) { .atelier-gallery__grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width: 480px) { .atelier-gallery__grid { grid-template-columns: 1fr; gap: 26px; } }

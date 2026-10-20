@@ -14,7 +14,7 @@
   }
 
   /* ---------- booking form ---------- */
-  var STUDIO_ADDRESS = "734 Walt Whitman Road, Melville, NY 11747";
+  var STUDIO_ADDRESS = "734 Walt Whitman Road, Second Floor, Suite 202, Melville, New York 11747";
   var TIME_SLOTS = ["10:00 AM", "11:30 AM", "1:00 PM", "2:30 PM", "4:00 PM", "5:30 PM"];
   var WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 

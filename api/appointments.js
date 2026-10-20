@@ -22,7 +22,7 @@ const { createApproval, escape } = require('../lib/approval');
 //                               and email will still succeed. See note at
 //                               bottom of file.
 
-const STUDIO_ADDRESS = "734 Whitecliffeman Road, second floor, suite 202, Melville, New York 11747";
+const STUDIO_ADDRESS = "734 Walt Whitman Road, Second Floor, Suite 202, Melville, New York 11747";
 const MAILBOX = process.env.MS_MAILBOX || "info@ateliersareno.com";
 
 function isValidEmail(v) {

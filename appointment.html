@@ -45,6 +45,12 @@
 #sms-consent-details{font:400 11px/1.5 var(--sans)!important;margin:6px 0 0 25px;letter-spacing:0;}
 .sms-consent__links{display:flex;flex-wrap:wrap;gap:16px;margin:7px 0 0 25px;font-size:11px;}
 .sms-consent__links a{text-decoration:underline;}
+.booking__services{margin:0 0 18px;line-height:1.65;}
+.booking__quick-links{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px;}
+.booking__quick-links .btn{min-height:44px;}
+.booking__visit{font-size:14px;line-height:1.65;margin:0 0 28px;}
+.booking__visit a{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:480px){.booking__quick-links{flex-direction:column;}.booking__quick-links .btn{text-align:center;}}
 </style>
 <meta property="og:url" content="https://ateliersareno.com/appointment.html">
 </head>
@@ -65,10 +71,17 @@
 <main class="booking-wrap">
   <div class="booking" data-booking>
     <div class="booking__media">
-      <img src="assets/img/Custom suiting in Sydney and Melbourne.jpeg" alt="Atelier Sareno appointment">
+      <img src="assets/img/Custom suiting in Sydney and Melbourne.jpeg" alt="Fabric selection for a private tailoring consultation">
     </div>
     <h1>Make an<br>appointment</h1>
     <p class="booking__lede">Consultations run 60&ndash;90 minutes and can be held at our atelier or at your home or office. Tell us a little about what you have in mind and we&rsquo;ll confirm within one business day.</p>
+
+    <p class="booking__services">Custom suits, tuxedos and shirts for men and women. Suits from <strong>$2,000</strong>. Private consultations in Melville, Long Island.</p>
+    <div class="booking__quick-links">
+      <a class="btn btn--ghost-dark" href="tel:+16312238775">Call the atelier</a>
+      <a class="btn btn--ghost-dark" href="services.html">Explore our services</a>
+    </div>
+    <p class="booking__visit">By appointment at 734 Walt Whitman Road, Second Floor, Suite 202, Melville, NY 11747. <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Atelier+Sareno&amp;destination_place_id=ChIJBSuMyAwp6IkRniY_C9g44b0" target="_blank" rel="noopener">Get directions</a>.</p>
 
     <form class="form" data-form>
       <div class="hp-field" aria-hidden="true" style="position:absolute;left:-9999px">

@@ -16,6 +16,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css?v=20261023-buttons">
 <style>
+  /* Center the homepage introduction while preserving its original column width. */
+  .home-introduction { grid-template-columns: minmax(0, 1fr); }
+  .home-introduction .split__copy { width: 50%; justify-self: center; }
+  @media (max-width: 900px) {
+    .home-introduction .split__copy { width: 100%; }
+  }
+
   /* Homepage readability refinement */
   .home-masthead {
     position: relative;
@@ -304,7 +311,7 @@
     <span>Made-to-Measure</span><span>Semi-Bespoke</span><span>Full Bespoke</span><span>Weddings</span><span>Alterations</span><span>Consultation</span><span>Made-to-Measure</span><span>Semi-Bespoke</span>
   </section>
 
-  <section class="split">
+  <section class="split home-introduction" id="custom-suits">
     <div class="split__copy">
       <h2>Custom suits on Long Island</h2>
       <p>Atelier Sareno creates custom-made suits for men and women, custom shirts and occasion wear. Meet personally with founder and designer Maryam Bahrami for fabric selection, design, measurements and fittings at our Melville showroom. Your garments are then crafted in Italy.</p>

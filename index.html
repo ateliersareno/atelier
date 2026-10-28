@@ -147,7 +147,10 @@
       border-bottom-color: rgba(248, 245, 239, .14);
     }
 
-    .hero { justify-content: center; }
+    .hero {
+      justify-content: center;
+      min-height: max(740px, calc(100svh - 92px));
+    }
 
     .hero__scrim {
       background:
@@ -160,8 +163,11 @@
 
     .hero__inner {
       margin: 0;
-      padding: 64px 20px 44px;
-      gap: 20px;
+      width: 100%;
+      min-height: max(740px, calc(100svh - 92px));
+      padding: 170px 20px 44px;
+      gap: 18px;
+      justify-content: flex-end;
     }
 
     .hero__title {
